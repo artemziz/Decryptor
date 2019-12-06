@@ -1,0 +1,29 @@
+﻿@{
+    Layout = "~/Views/Shared/_MyLayout.cshtml";
+}
+@model CryptData
+
+
+    <main class="mdl-layout mdl-js-layout">
+        <header class="mdl-grid">
+            <div class="cat mdl-cell mdl-cell--4-col"> <img src="~/images/PLKelDzI00E.jpg"></div>
+            <div class="mdl-cell mdl-cell--4-col">
+                <h1 id="logo">Decryptor</h1>
+            </div>
+            <div class="cat mdl-cell mdl-cell--4-col">
+                <img src="~/images/RfaDSANbbT8.jpg">
+            </div>
+        </header>
+        <article>
+
+            <section class="mdl-grid topButtons">
+                <a class="mdl-cell mdl-cell--6-col mdl-button mdl-js-button mdl-button--primary" asp-action="Encrypt">Зашифровать</a>
+                <a class="mdl-cell mdl-cell--6-col mdl-button mdl-js-button mdl-button--accent" asp-action="Decrypt">Расшифровать</a>
+            </section>
+
+        </article>
+
+        
+
+    </main>
+

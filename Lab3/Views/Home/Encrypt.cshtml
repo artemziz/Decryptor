@@ -1,0 +1,97 @@
+﻿
+@model CryptData
+@{
+    Layout = "~/Views/Shared/_MyLayout.cshtml";
+}
+
+<header class="mdl-grid">
+    <div class="cat mdl-cell mdl-cell--4-col"> <img src="~/images/PLKelDzI00E.jpg"></div>
+    <div class="mdl-cell mdl-cell--4-col">
+        <h1 id="logo">Decryptor</h1>
+    </div>
+    <div class="cat mdl-cell mdl-cell--4-col">
+        <img src="~/images/RfaDSANbbT8.jpg">
+    </div>
+</header>
+<article>
+    @{
+        if (Model == null)
+        {
+            <form asp-action="Encrypt" method="post">
+                <section class="mdl-grid textArea">
+
+                    <textarea asp-for="DecryptedData" placeholder="Введите текст или выберите файл..." class="mdl-cell mdl-cell--12-col  " rows="10" cols="90"></textarea>
+
+                </section>
+                <section class="mdl-grid bottomButtons">
+                    <input asp-for="Key" placeholder="Введите ключ..." class="mdl-textfield__input mdl-cell mdl-cell--4-col" type="text">
+                    <button asp-action="Encrypt" class="mdl-cell mdl-cell--4-col mdl-button mdl-js-button mdl-button--primary">Выбрать файл</button>
+                    <button type="submit" class="mdl-cell mdl-cell--4-col mdl-button mdl-js-button mdl-button--accent">Расшифровать</button>
+                </section>
+            </form>
+        }
+    }
+
+    @{
+        if (Model != null)
+        {
+            if (Model.DecryptedData != null && Model.EncryptedData != null)
+            {
+                <section class="mdl-grid">
+                    <div class="mdl-cell mdl-cell--6-col">
+                        <div class="mdl-card card-wide">
+                            <div class="mdl-card__title cardTitleWas">
+                                <h2 class="mdl-card__title-text">Было</h2>
+                            </div>
+
+                            <div class="mdl-card__supporting-text">
+                                <p>
+                                    Tincidunt integer eu augue augue nunc elit dolor, luctus placerat scelerisque euismod, iaculis eu lacus nunc mi elit, vehicula ut laoreet ac, aliquam sit amet justo nunc tempor, metus vel.
+                                    Placerat suscipit, orci nisl iaculis eros, a tincidunt nisi odio eget lorem nulla condimentum tempor mattis ut vitae feugiat augue cras ut metus a risus iaculis scelerisque eu ac ante.
+                                    Fusce non varius purus aenean nec magna felis fusce vestibulum velit mollis odio sollicitudin lacinia aliquam posuere, sapien elementum lobortis tincidunt, turpis dui ornare nisl, sollicitudin interdum turpis nunc eget.
+                                    Sem nulla eu ultricies orci praesent id augue nec lorem pretium congue sit amet ac nunc fusce iaculis lorem eu diam hendrerit at mattis purus dignissim vivamus mauris tellus, fringilla.
+                                    Vel dapibus a, blandit quis erat vivamus elementum aliquam luctus etiam fringilla pretium sem vitae sodales mauris id nulla est praesent laoreet, metus vel auctor aliquam, eros purus vulputate leo.
+                                    Eget consequat neque quam id tellus duis ultricies tempor tortor, vitae dignissim ligula mattis nec in hac habitasse platea dictumst ut arcu enim, dictum quis ultrices id, sagittis eget nulla.
+                                    Sed nunc mi, congue ut ultricies ac, varius a eros donec porttitor, libero fermentum fringilla laoreet, eros arcu sodales ante, ut dictum risus lectus vel quam integer ultricies, nunc eget.
+                                    Elementum euismod, orci enim vestibulum orci, nec suscipit urna odio et tellus suspendisse suscipit orci sit amet sem venenatis nec lobortis sem suscipit nullam nec imperdiet velit mauris eu nisi.
+                                    @Model.DecryptedData;
+
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mdl-cell mdl-cell--6-col ">
+                        <div class="mdl-card card-wide">
+                            <div class="mdl-card__title cardTitleNow">
+                                <h2 class="mdl-card__title-text">Стало</h2>
+                            </div>
+
+                            <div class="mdl-card__supporting-text">
+                                <p>
+                                    Tincidunt integer eu augue augue nunc elit dolor, luctus placerat scelerisque euismod, iaculis eu lacus nunc mi elit, vehicula ut laoreet ac, aliquam sit amet justo nunc tempor, metus vel.
+                                    Placerat suscipit, orci nisl iaculis eros, a tincidunt nisi odio eget lorem nulla condimentum tempor mattis ut vitae feugiat augue cras ut metus a risus iaculis scelerisque eu ac ante.
+                                    Fusce non varius purus aenean nec magna felis fusce vestibulum velit mollis odio sollicitudin lacinia aliquam posuere, sapien elementum lobortis tincidunt, turpis dui ornare nisl, sollicitudin interdum turpis nunc eget.
+                                    Sem nulla eu ultricies orci praesent id augue nec lorem pretium congue sit amet ac nunc fusce iaculis lorem eu diam hendrerit at mattis purus dignissim vivamus mauris tellus, fringilla.
+                                    Vel dapibus a, blandit quis erat vivamus elementum aliquam luctus etiam fringilla pretium sem vitae sodales mauris id nulla est praesent laoreet, metus vel auctor aliquam, eros purus vulputate leo.
+                                    Eget consequat neque quam id tellus duis ultricies tempor tortor, vitae dignissim ligula mattis nec in hac habitasse platea dictumst ut arcu enim, dictum quis ultrices id, sagittis eget nulla.
+                                    Sed nunc mi, congue ut ultricies ac, varius a eros donec porttitor, libero fermentum fringilla laoreet, eros arcu sodales ante, ut dictum risus lectus vel quam integer ultricies, nunc eget.
+                                    Elementum euismod, orci enim vestibulum orci, nec suscipit urna odio et tellus suspendisse suscipit orci sit amet sem venenatis nec lobortis sem suscipit nullam nec imperdiet velit mauris eu nisi.
+                                    @Model.EncryptedData;
+
+
+                                </p>
+                                <a>Сохранить в файл</a>
+                            </div>
+                        </div>
+                    </div>
+
+                </section>
+
+            }
+        }
+
+    }
+    <a id="goHome" class="mdl-button mdl-js-button mdl-button--accent" asp-action="Index">Домой</a>
+</article>
+
+

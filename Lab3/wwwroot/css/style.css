@@ -1,0 +1,80 @@
+img{
+     width: 0px;
+     height: 0px;
+     border-radius: 50px;
+     box-shadow: 5px 5px 5px;
+     transition: all 2s;
+     
+}
+#logo{
+    visibility: hidden;
+}
+header{
+    position: relative;
+    
+    text-align: center;
+}
+
+#logo{
+    position: relative;
+    margin-top: 30%;
+    
+}
+.topButtons{
+    width: fit-content;
+    opacity: 0.8;
+    background: white;
+    border-radius: 50px;
+    
+
+   
+}
+.bottomButtons {
+    opacity: 0.8;
+    background: white;
+    border-radius: 50px;
+    margin-left: 15%;
+    margin-right: 15%;
+    margin-top: 5%;
+}
+.textArea{
+    margin-left: 15%;
+    margin-right: 15%;
+    margin-top: 5%;
+    
+    
+}
+body{
+    background-image: url(/images/trippy_image.0.0.jpg);
+    background-size: cover;
+    
+}
+
+article{
+    margin-top: 5%;
+}
+
+.card-wide{
+    width:100%;
+    border-radius:10%;
+
+}
+.cardTitleWas{
+    background-image:url("/images/dFTN_MS8f3Q.jpg");
+}
+.cardTitleNow{
+    background-image:url("/images/42d704bc28d24ec32a9179d6181de3b8.jpg")
+}
+
+.mdl-card__title{
+    height:560px;
+}
+
+#goHome{
+    margin:2%;
+    background-color:white;
+    opacity:0.8;
+    float:right;
+    margin:5%;
+}
+
