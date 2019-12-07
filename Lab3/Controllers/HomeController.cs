@@ -6,16 +6,22 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Lab3.Models;
+using Microsoft.AspNetCore.Http;
+using System.IO;
+using Microsoft.AspNetCore.Hosting;
+
+using GemBox.Document;
 
 namespace Lab3.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        IWebHostEnvironment _appEnvironment;
+        public HomeController(ILogger<HomeController> logger, IWebHostEnvironment appEnvironment)
         {
             _logger = logger;
+            _appEnvironment = appEnvironment;
         }
 
         public IActionResult Index()
@@ -43,9 +49,43 @@ namespace Lab3.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult Encrypt(CryptData cryptData)
+        public  IActionResult Encrypt(CryptData cryptData)
         {
+            //free license
+            ComponentInfo.SetLicense("FREE-LIMITED-KEY");
+
+
+            if (cryptData.File !=null)
+            {
+                string path = _appEnvironment.WebRootPath+"/files/text.docx";
+                using(FileStream fs = System.IO.File.Create(path))
+                {
+                    cryptData.File.CopyTo(fs);
+                    
+                }
+                // Load Word document from file's path.
+                var document = DocumentModel.Load(path);
+                cryptData.DecryptedData = document.Content.ToString();
+                System.IO.File.Delete(path);
+
+
+
+
+
+
+
+
+
+
+
+
+
+            }
+
+
             cryptData.EncryptedData = "Зашифровано";
+            
+           
             return View(cryptData);
         }
 
