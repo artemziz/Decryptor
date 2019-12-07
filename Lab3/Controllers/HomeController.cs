@@ -19,15 +19,23 @@ namespace Lab3.Controllers
 
 
         public char[] alpabet = { 'а','б','в','г','д','е','ё','ж','з','и','й','к','л','м','н','о','п','р','с','т','у','ф','х','ц','ч','ш','щ','ъ','ы','ь','э','ю','я' };
-        
-        
-        
+        public string path;
+
+        public void DownloadFile(CryptData cryptData)
+        {
+            using (FileStream fs = System.IO.File.Create(path))
+            {
+                cryptData.File.CopyTo(fs);
+            }
+        }
+
         private readonly ILogger<HomeController> _logger;
         IWebHostEnvironment _appEnvironment;
         public HomeController(ILogger<HomeController> logger, IWebHostEnvironment appEnvironment)
         {
             _logger = logger;
             _appEnvironment = appEnvironment;
+            path = _appEnvironment.WebRootPath + "/lib/text.docx";
         }
 
         public IActionResult Index()
@@ -79,11 +87,8 @@ namespace Lab3.Controllers
 
             if (cryptData.File != null)
             {
-                string path = _appEnvironment.WebRootPath + "/files/text.docx";
-                using (FileStream fs = System.IO.File.Create(path))
-                {
-                    cryptData.File.CopyTo(fs);
-                }
+                DownloadFile(cryptData);
+                
                 
                 var document = DocumentModel.Load(path);
                 cryptData.EncryptedData = document.Content.ToString();
@@ -141,12 +146,9 @@ namespace Lab3.Controllers
 
             if (cryptData.File !=null)
             {
-                string path = _appEnvironment.WebRootPath+"/files/text.docx";
-                using(FileStream fs = System.IO.File.Create(path))
-                {
-                    cryptData.File.CopyTo(fs);
-                    
-                }
+
+                DownloadFile(cryptData);
+
                 // Load Word document from file's path.
                 var document = DocumentModel.Load(path);
                 cryptData.DecryptedData = document.Content.ToString();
