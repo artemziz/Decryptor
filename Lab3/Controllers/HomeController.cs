@@ -20,6 +20,7 @@ namespace Lab3.Controllers
 
         private readonly char[] alpabet = { 'а','б','в','г','д','е','ё','ж','з','и','й','к','л','м','н','о','п','р','с','т','у','ф','х','ц','ч','ш','щ','ъ','ы','ь','э','ю','я' };
         private string path;
+        
 
         public void DownloadFile(CryptData cryptData)
         {
@@ -28,6 +29,23 @@ namespace Lab3.Controllers
                 cryptData.File.CopyTo(fs);
             }
         }
+
+        public void SaveFile(CryptData cryptData,bool answer)
+        {
+            var doc = new DocumentModel();
+                           
+                if (answer)
+                {
+                    doc.Content.LoadText(cryptData.DecryptedData);
+                }
+                else
+                {
+                    doc.Content.LoadText(cryptData.EncryptedData);
+                }
+                
+            doc.Save(path);
+        }
+        
 
         private readonly ILogger<HomeController> _logger;
         IWebHostEnvironment _appEnvironment;
@@ -83,25 +101,30 @@ namespace Lab3.Controllers
         public IActionResult Decrypt(CryptData cryptData)
         {
             if (ModelState.IsValid)
-            {
-                //free license
-                ComponentInfo.SetLicense("FREE-LIMITED-KEY");
+            {               
+                    //free license
+                    ComponentInfo.SetLicense("FREE-LIMITED-KEY");
 
-                if (cryptData.File != null)
-                {
-                    DownloadFile(cryptData);
+                    if (cryptData.File != null)
+                    {
+                        DownloadFile(cryptData);
 
 
-                    var document = DocumentModel.Load(path);
-                    cryptData.EncryptedData = document.Content.ToString();
-                    System.IO.File.Delete(path);
-                    cryptData.DecryptedData = Decode(cryptData.EncryptedData, cryptData.Key);
-                }
-                else
-                {
-                    cryptData.DecryptedData = Decode(cryptData.EncryptedData, cryptData.Key);
-                }
-                return View(cryptData);
+                        var document = DocumentModel.Load(path);
+                        cryptData.EncryptedData = document.Content.ToString();
+                        cryptData.DecryptedData = Decode(cryptData.EncryptedData, cryptData.Key);
+                        SaveFile(cryptData,true);
+                        
+
+
+                    }
+                    else
+                    {
+                        cryptData.DecryptedData = Decode(cryptData.EncryptedData, cryptData.Key);
+                        SaveFile(cryptData,true);
+
+                    }
+                    return View(cryptData);                 
             }
             else
             {
@@ -166,10 +189,14 @@ namespace Lab3.Controllers
 
                     System.IO.File.Delete(path);
                     cryptData.EncryptedData = Encode(cryptData.DecryptedData, cryptData.Key);
+                    SaveFile(cryptData, false);
+
                 }
                 else
                 {
                     cryptData.EncryptedData = Encode(cryptData.DecryptedData, cryptData.Key);
+                    SaveFile(cryptData, false);
+
                 }
                 return View(cryptData);
             }
@@ -180,7 +207,11 @@ namespace Lab3.Controllers
             
         }
 
-
+        [HttpGet]
+        public ActionResult Download()
+        {
+            return PhysicalFile(path, "text/plain", "Result.docx");
+        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

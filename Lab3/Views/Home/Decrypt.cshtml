@@ -43,7 +43,7 @@
                             <input class="form-control-file" accept=".docx,.txt" asp-for="File" type="file" />
                         </div>
                         <div>
-                            <button type="submit" class="mdl-button mdl-js-button mdl-button--accent">Расшифровать</button>
+                            <button type="submit" class="SaveButton mdl-button mdl-js-button mdl-button--accent">Расшифровать</button>
                         </div>
                     </form>
                 </div>
@@ -84,7 +84,10 @@
 
 
                                 </p>
-                                <a>Сохранить в файл</a>
+                               
+                                    <a asp-action="Download" class="SaveButton mdl-button mdl-js-button mdl-button--accent">Сохранить в файл</a>
+                               
+
                             </div>
                         </div>
                     </div>

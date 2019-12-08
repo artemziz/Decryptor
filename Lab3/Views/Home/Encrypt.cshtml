@@ -20,7 +20,7 @@
         {
         <section class="mdl-grid textArea">
             <div class="container-fluid">
-                <form asp-action="Decrypt" method="post" enctype="multipart/form-data">
+                <form asp-action="Encrypt" method="post" enctype="multipart/form-data">
                     <div class="form-group">
 
                         <textarea asp-for="DecryptedData" placeholder="Введите текст или выберите файл..." class="form-control" rows="10" cols="90"></textarea>
@@ -38,7 +38,7 @@
                         <input class="form-control-file" accept=".docx,.txt" asp-for="File" type="file" />
                     </div>
                     <div>
-                        <button type="submit" class="mdl-button mdl-js-button mdl-button--accent">Зашифровать</button>
+                        <button type="submit" class="SaveButton mdl-button mdl-js-button mdl-button--accent">Зашифровать</button>
                     </div>
                 </form>
             </div>
@@ -78,7 +78,7 @@
 
 
                                 </p>
-                                <a>Сохранить в файл</a>
+                                <a asp-action="Download" class="SaveButton mdl-button mdl-js-button mdl-button--accent">Сохранить в файл</a>
                             </div>
                         </div>
                     </div>

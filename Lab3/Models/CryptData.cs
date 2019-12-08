@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using GemBox.Document;
+
 
 namespace Lab3.Models
 {
@@ -14,7 +16,7 @@ namespace Lab3.Models
             CryptData val = value as CryptData;
             if (val != null)
             {
-                if (val.File == null && (val.DecryptedData == null || val.EncryptedData == null))
+                if (val.File == null && (val.DecryptedData == null && val.EncryptedData == null))
                 {
                     return false;
                 }
@@ -41,5 +43,8 @@ namespace Lab3.Models
         public  string DecryptedData { get; set; }
 
         public  IFormFile File { get; set; }
+
+        
+
     }
 }
