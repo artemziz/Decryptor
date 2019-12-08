@@ -18,8 +18,8 @@ namespace Lab3.Controllers
     {
 
 
-        public char[] alpabet = { 'а','б','в','г','д','е','ё','ж','з','и','й','к','л','м','н','о','п','р','с','т','у','ф','х','ц','ч','ш','щ','ъ','ы','ь','э','ю','я' };
-        public string path;
+        private readonly char[] alpabet = { 'а','б','в','г','д','е','ё','ж','з','и','й','к','л','м','н','о','п','р','с','т','у','ф','х','ц','ч','ш','щ','ъ','ы','ь','э','ю','я' };
+        private string path;
 
         public void DownloadFile(CryptData cryptData)
         {
@@ -82,28 +82,37 @@ namespace Lab3.Controllers
         [HttpPost]
         public IActionResult Decrypt(CryptData cryptData)
         {
-            //free license
-            ComponentInfo.SetLicense("FREE-LIMITED-KEY");
-
-            if (cryptData.File != null)
+            if (ModelState.IsValid)
             {
-                DownloadFile(cryptData);
-                
-                
-                var document = DocumentModel.Load(path);
-                cryptData.EncryptedData = document.Content.ToString();
-                System.IO.File.Delete(path);
-                cryptData.DecryptedData = Decode(cryptData.EncryptedData,cryptData.Key);
+                //free license
+                ComponentInfo.SetLicense("FREE-LIMITED-KEY");
+
+                if (cryptData.File != null)
+                {
+                    DownloadFile(cryptData);
+
+
+                    var document = DocumentModel.Load(path);
+                    cryptData.EncryptedData = document.Content.ToString();
+                    System.IO.File.Delete(path);
+                    cryptData.DecryptedData = Decode(cryptData.EncryptedData, cryptData.Key);
+                }
+                else
+                {
+                    cryptData.DecryptedData = Decode(cryptData.EncryptedData, cryptData.Key);
+                }
+                return View(cryptData);
             }
             else
             {
-                cryptData.DecryptedData = Decode(cryptData.EncryptedData, cryptData.Key);
+                return View();
             }
-            return View(cryptData);
+            
         }
 
         public string Encode(string file,string key) 
         { 
+            
             string result = "";
             key = key.ToLower();
             int keyword_index = 0;
@@ -141,26 +150,34 @@ namespace Lab3.Controllers
         [HttpPost]
         public  IActionResult Encrypt(CryptData cryptData)
         {
-            //free license
-            ComponentInfo.SetLicense("FREE-LIMITED-KEY");
-
-            if (cryptData.File !=null)
+            if (ModelState.IsValid)
             {
+                //free license
+                ComponentInfo.SetLicense("FREE-LIMITED-KEY");
 
-                DownloadFile(cryptData);
+                if (cryptData.File != null)
+                {
 
-                // Load Word document from file's path.
-                var document = DocumentModel.Load(path);
-                cryptData.DecryptedData = document.Content.ToString();
-                
-                System.IO.File.Delete(path);
-                cryptData.EncryptedData = Encode(cryptData.DecryptedData,cryptData.Key);
+                    DownloadFile(cryptData);
+
+                    // Load Word document from file's path.
+                    var document = DocumentModel.Load(path);
+                    cryptData.DecryptedData = document.Content.ToString();
+
+                    System.IO.File.Delete(path);
+                    cryptData.EncryptedData = Encode(cryptData.DecryptedData, cryptData.Key);
+                }
+                else
+                {
+                    cryptData.EncryptedData = Encode(cryptData.DecryptedData, cryptData.Key);
+                }
+                return View(cryptData);
             }
             else
             {
-                cryptData.EncryptedData = Encode(cryptData.DecryptedData, cryptData.Key);
-            }                                 
-            return View(cryptData);
+                return View();
+            }
+            
         }
 
 

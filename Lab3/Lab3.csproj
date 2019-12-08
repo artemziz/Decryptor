@@ -5,11 +5,24 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\files\" />
+    <Compile Remove="wwwroot\files\**" />
+    <Content Remove="wwwroot\files\**" />
+    <EmbeddedResource Remove="wwwroot\files\**" />
+    <None Remove="wwwroot\files\**" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="GemBox.Document" Version="31.0.0.1089" />
+    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="2.9.8">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="wwwroot\js\script.js">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
 

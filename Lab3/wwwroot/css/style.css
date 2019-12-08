@@ -29,7 +29,10 @@ header{
 
    
 }
-.bottomButtons {
+.container-fluid{
+    margin:5%;
+}
+.textArea {
     opacity: 0.8;
     background: white;
     border-radius: 50px;
@@ -37,16 +40,10 @@ header{
     margin-right: 15%;
     margin-top: 5%;
 }
-.textArea{
-    margin-left: 15%;
-    margin-right: 15%;
-    margin-top: 5%;
-    
-    
-}
 body{
     background-image: url(/images/trippy_image.0.0.jpg);
-    background-size: cover;
+    background-size:cover;
+    
     
 }
 
@@ -75,6 +72,9 @@ article{
     background-color:white;
     opacity:0.8;
     float:right;
-    margin:5%;
+    
 }
+
+
+   
 

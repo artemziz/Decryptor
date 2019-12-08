@@ -13,21 +13,41 @@
     </div>
 </header>
 <article>
+    
+    
+            
+        
+        
+    
+    
     @{
         if (Model == null)
-        {
-            <form asp-action="Decrypt" method="post" enctype="multipart/form-data">
-                <section class="mdl-grid textArea">
+        {      
+        <section class="mdl-grid textArea">
+                <div class="container-fluid">
+                    <form asp-action="Decrypt" method="post" enctype="multipart/form-data">
+                            <div class="form-group">
 
-                    <textarea asp-for="EncryptedData" placeholder="Введите текст или выберите файл..." class="mdl-cell mdl-cell--12-col  " rows="10" cols="90"></textarea>
+                                <textarea asp-for="EncryptedData" placeholder="Введите текст или выберите файл..." class="form-control" rows="10" cols="90"></textarea>
+                                
+                            </div>
 
-                </section>
-                <section class="mdl-grid bottomButtons">
-                    <input asp-for="Key" placeholder="Введите ключ..." class="mdl-textfield__input mdl-cell mdl-cell--4-col" type="text">
-                    <input class="mdl-cell mdl-cell--4-col mdl-button mdl-js-button mdl-button--primary" asp-for="File" type="file" />
-                    <button type="submit" class="mdl-cell mdl-cell--4-col mdl-button mdl-js-button mdl-button--accent">Расшифровать</button>
-                </section>
-            </form>
+
+                        <div class="form-group">
+                            <input asp-for="Key" placeholder="Введите ключ..." class="form-control" type="text">
+                           
+                        </div>
+
+                        <div class="form-group">
+
+                            <input class="form-control-file" accept=".docx,.txt" asp-for="File" type="file" />
+                        </div>
+                        <div>
+                            <button type="submit" class="mdl-button mdl-js-button mdl-button--accent">Расшифровать</button>
+                        </div>
+                    </form>
+                </div>
+        </section>
         }
     }
 
@@ -36,41 +56,41 @@
         {
             if (Model.DecryptedData != null && Model.EncryptedData != null)
             {
-        <section class="mdl-grid">
-                <div class="mdl-cell mdl-cell--6-col">
+                <section class="mdl-grid">
+                    <div class="mdl-cell mdl-cell--6-col">
                         <div class="mdl-card card-wide">
                             <div class="mdl-card__title cardTitleWas">
                                 <h2 class="mdl-card__title-text">Было</h2>
                             </div>
-                            
+
                             <div class="mdl-card__supporting-text">
                                 <p>
-                                    
+
                                     @Model.EncryptedData
                                 </p>
                             </div>
                         </div>
-                </div>
-                <div class="mdl-cell mdl-cell--6-col ">
-                    <div class="mdl-card card-wide">
-                        <div class="mdl-card__title cardTitleNow">
-                            <h2 class="mdl-card__title-text">Стало</h2>
-                        </div>
-                        
-                        <div class="mdl-card__supporting-text">
-                            <p>
-                                
-                                @Model.DecryptedData
+                    </div>
+                    <div class="mdl-cell mdl-cell--6-col ">
+                        <div class="mdl-card card-wide">
+                            <div class="mdl-card__title cardTitleNow">
+                                <h2 class="mdl-card__title-text">Стало</h2>
+                            </div>
+
+                            <div class="mdl-card__supporting-text">
+                                <p>
+
+                                    @Model.DecryptedData
 
 
-                            </p>
-                            <a>Сохранить в файл</a>
+                                </p>
+                                <a>Сохранить в файл</a>
+                            </div>
                         </div>
                     </div>
-                </div>
-                
-        </section>
-                
+
+                </section>
+
             }
         }
 

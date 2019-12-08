@@ -1,6 +1,6 @@
 let imagesCase = document.getElementsByClassName("cat");
 let images = [];
-console.log("eqwe");
+
 for(let i =0;i<imagesCase.length;i++){
     images.push(imagesCase[i].firstElementChild);
 }
@@ -15,4 +15,14 @@ setTimeout(()=>{
     document.getElementById("logo").style.visibility = "visible";
 },1800);
 
-},500);
+}, 500);
+
+
+
+let errors = document.body.getElementsByClassName("errors")[0];
+//if (errors.getElementsByClassName("mdl-cell mdl-cell--12-col").length != 0) {
+//    errors.getElementsByClassName("mdl-cell mdl-cell--12-col")[0].style.visibility = 'visible';
+//}
+
+
+

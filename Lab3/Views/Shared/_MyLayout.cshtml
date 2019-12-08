@@ -3,13 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <title>Decryptor</title>
+
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.14.0/jquery.validate.min.js"
+                asp-fallback-src="~/lib/jquery-validation/dist/jquery.validate.min.js"
+                asp-fallback-test="window.jQuery && window.jQuery.validator">
+    </script>
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery.validation.unobtrusive/3.2.6/jquery.validate.unobtrusive.min.js"
+                asp-fallback-src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"
+                asp-fallback-test="window.jQuery && window.jQuery.validator && window.jQuery.validator.unobtrusive">
+    </script>
+
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap-grid.min.css" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+
     <link rel="stylesheet"
           href="https://storage.googleapis.com/code.getmdl.io/1.0.6/material.indigo-pink.min.css">
     <link rel="stylesheet"
           href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="css/styles.css">
+
     <link rel="stylesheet"
-          href="http://fonts.googleapis.com/css?family=Roboto:400,100,500,300italic,500italic,700italic,900,300">
+          href="https://fonts.googleapis.com/css?family=Roboto:400,100,500,300italic,500italic,700italic,900,300">
     <script src="https://storage.googleapis.com/code.getmdl.io/1.0.6/material.min.js">
     </script>
     <link rel="stylesheet" href="~/css/style.css">
@@ -21,7 +35,7 @@
     <main>
         @RenderBody()
     </main>
-
-    <script src="~/js/script.js"></script>
+    
+    <script  src="~/js/script.js"></script>
 </body>
 </html>
