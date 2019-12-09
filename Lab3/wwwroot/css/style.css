@@ -24,10 +24,7 @@ header{
     width: fit-content;
     opacity: 0.8;
     background: white;
-    border-radius: 50px;
-    
-
-   
+    border-radius: 50px;       
 }
 .container-fluid{
     margin:5%;
@@ -43,8 +40,7 @@ header{
 body{
     background-image: url(/images/trippy_image.0.0.jpg);
     background-size:cover;
-    
-    
+       
 }
 
 article{

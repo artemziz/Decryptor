@@ -19,10 +19,4 @@ setTimeout(()=>{
 
 
 
-let errors = document.body.getElementsByClassName("errors")[0];
-//if (errors.getElementsByClassName("mdl-cell mdl-cell--12-col").length != 0) {
-//    errors.getElementsByClassName("mdl-cell mdl-cell--12-col")[0].style.visibility = 'visible';
-//}
-
-
 

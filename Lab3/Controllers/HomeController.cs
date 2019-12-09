@@ -20,6 +20,9 @@ namespace Lab3.Controllers
 
         private readonly char[] alpabet = { 'а','б','в','г','д','е','ё','ж','з','и','й','к','л','м','н','о','п','р','с','т','у','ф','х','ц','ч','ш','щ','ъ','ы','ь','э','ю','я' };
         private string path;
+        private readonly ILogger<HomeController> _logger;
+        IWebHostEnvironment _appEnvironment;
+
         
 
         public void DownloadFile(CryptData cryptData)
@@ -32,6 +35,8 @@ namespace Lab3.Controllers
 
         public void SaveFile(CryptData cryptData,bool answer)
         {
+            //free license
+            ComponentInfo.SetLicense("FREE-LIMITED-KEY");
             var doc = new DocumentModel();
                            
                 if (answer)
@@ -47,8 +52,7 @@ namespace Lab3.Controllers
         }
         
 
-        private readonly ILogger<HomeController> _logger;
-        IWebHostEnvironment _appEnvironment;
+        
         public HomeController(ILogger<HomeController> logger, IWebHostEnvironment appEnvironment)
         {
             _logger = logger;
@@ -102,12 +106,14 @@ namespace Lab3.Controllers
         {
             if (ModelState.IsValid)
             {               
-                    //free license
-                    ComponentInfo.SetLicense("FREE-LIMITED-KEY");
+                    
 
                     if (cryptData.File != null)
                     {
+                        //free license
+                        ComponentInfo.SetLicense("FREE-LIMITED-KEY");
                         DownloadFile(cryptData);
+
 
 
                         var document = DocumentModel.Load(path);
@@ -175,12 +181,11 @@ namespace Lab3.Controllers
         {
             if (ModelState.IsValid)
             {
-                //free license
-                ComponentInfo.SetLicense("FREE-LIMITED-KEY");
-
+                
                 if (cryptData.File != null)
                 {
-
+                    //free license
+                    ComponentInfo.SetLicense("FREE-LIMITED-KEY");
                     DownloadFile(cryptData);
 
                     // Load Word document from file's path.

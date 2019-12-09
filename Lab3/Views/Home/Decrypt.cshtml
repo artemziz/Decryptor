@@ -13,29 +13,31 @@
     </div>
 </header>
 <article>
-    
-    
-            
-        
-        
-    
-    
+
+
+
+
+
+
+
     @{
         if (Model == null)
-        {      
-        <section class="mdl-grid textArea">
+        {
+        
+            <section class="mdl-grid textArea">
                 <div class="container-fluid">
+                    <div asp-validation-summary="All"></div>
                     <form asp-action="Decrypt" method="post" enctype="multipart/form-data">
-                            <div class="form-group">
+                        <div class="form-group">
 
-                                <textarea asp-for="EncryptedData" placeholder="Введите текст или выберите файл..." class="form-control" rows="10" cols="90"></textarea>
-                                
-                            </div>
+                            <textarea asp-for="EncryptedData" placeholder="Введите текст или выберите файл..." class="form-control" rows="10" cols="90"></textarea>
+
+                        </div>
 
 
                         <div class="form-group">
                             <input asp-for="Key" placeholder="Введите ключ..." class="form-control" type="text">
-                           
+
                         </div>
 
                         <div class="form-group">
@@ -47,7 +49,7 @@
                         </div>
                     </form>
                 </div>
-        </section>
+            </section>
         }
     }
 
@@ -84,9 +86,9 @@
 
 
                                 </p>
-                               
-                                    <a asp-action="Download" class="SaveButton mdl-button mdl-js-button mdl-button--accent">Сохранить в файл</a>
-                               
+
+                                <a asp-action="Download" class="SaveButton mdl-button mdl-js-button mdl-button--accent">Сохранить в файл</a>
+
 
                             </div>
                         </div>
