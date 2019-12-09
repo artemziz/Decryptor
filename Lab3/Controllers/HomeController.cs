@@ -89,7 +89,14 @@ namespace Lab3.Controllers
         private readonly ILogger<HomeController> _logger;
         IWebHostEnvironment _appEnvironment;
 
-        
+        public HomeController(ILogger<HomeController> logger, IWebHostEnvironment appEnvironment)
+        {
+            _logger = logger;
+            _appEnvironment = appEnvironment;
+            path = _appEnvironment.WebRootPath + "/lib/text.docx";
+        }
+
+
 
         public void DownloadFile(CryptData cryptData)
         {
@@ -119,12 +126,7 @@ namespace Lab3.Controllers
         
 
         
-        public HomeController(ILogger<HomeController> logger, IWebHostEnvironment appEnvironment)
-        {
-            _logger = logger;
-            _appEnvironment = appEnvironment;
-            path = _appEnvironment.WebRootPath + "/lib/text.docx";
-        }
+        
 
         public IActionResult Index()
         {

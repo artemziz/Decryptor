@@ -38,7 +38,7 @@ namespace Lab3.Models
         public  string EncryptedData { get; set; }
 
         [Required(ErrorMessage ="Введите ключ")]
-        [RegularExpression(@"[а-яА-Я]",ErrorMessage ="Неправильное значение ключа")]
+        
         public  string Key { get; set; }
         public  string DecryptedData { get; set; }
 
