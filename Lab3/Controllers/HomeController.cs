@@ -144,9 +144,9 @@ namespace Lab3.Controllers
         public IActionResult Decrypt(CryptData cryptData)
         {
             if (ModelState.IsValid)
-            {               
-                    
-
+            {
+                try
+                {
                     if (cryptData.File != null)
                     {
                         //free license
@@ -158,18 +158,25 @@ namespace Lab3.Controllers
                         var document = DocumentModel.Load(path);
                         cryptData.EncryptedData = document.Content.ToString();
                         cryptData.DecryptedData = Decryptor.Decode(cryptData.EncryptedData, cryptData.Key);
-                        SaveFile(cryptData,true);
-                        
+                        SaveFile(cryptData, true);
+
 
 
                     }
                     else
                     {
                         cryptData.DecryptedData = Decryptor.Decode(cryptData.EncryptedData, cryptData.Key);
-                        SaveFile(cryptData,true);
+                        SaveFile(cryptData, true);
 
                     }
-                    return View(cryptData);                 
+                    return View(cryptData);
+                }
+                catch
+                {
+                    return View();
+                }
+
+                                    
             }
             else
             {
@@ -193,17 +200,25 @@ namespace Lab3.Controllers
                 
                 if (cryptData.File != null)
                 {
-                    //free license
-                    ComponentInfo.SetLicense("FREE-LIMITED-KEY");
-                    DownloadFile(cryptData);
+                    try
+                    {
+                        //free license
+                        ComponentInfo.SetLicense("FREE-LIMITED-KEY");
+                        DownloadFile(cryptData);
 
-                    // Load Word document from file's path.
-                    var document = DocumentModel.Load(path);
-                    cryptData.DecryptedData = document.Content.ToString();
+                        // Load Word document from file's path.
+                        var document = DocumentModel.Load(path);
+                        cryptData.DecryptedData = document.Content.ToString();
 
-                    System.IO.File.Delete(path);
-                    cryptData.EncryptedData = Decryptor.Encode(cryptData.DecryptedData, cryptData.Key);
-                    SaveFile(cryptData, false);
+                        System.IO.File.Delete(path);
+                        cryptData.EncryptedData = Decryptor.Encode(cryptData.DecryptedData, cryptData.Key);
+                        SaveFile(cryptData, false);
+                    }
+                    catch
+                    {
+                        return View();
+                    }
+                    
 
                 }
                 else
