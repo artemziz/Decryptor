@@ -17,11 +17,11 @@ namespace Lab3.Models
             if (val != null)
             {
                 if (val.File == null && (val.DecryptedData == null && val.EncryptedData == null))
-                {
+                {                   
                     return false;
                 }
                 else
-                {
+                {                   
                     return true;
                 }
             }
@@ -32,7 +32,7 @@ namespace Lab3.Models
             
         }
     }
-    [NotAllowedAttribute(ErrorMessage ="Введите данные")]
+    [NotAllowedAttribute(ErrorMessage ="Что-то не так")]
     public class CryptData
     {
         public  string EncryptedData { get; set; }

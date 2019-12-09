@@ -14,78 +14,13 @@ using GemBox.Document;
 
 namespace Lab3.Controllers
 {
-    public static class Decryptor
-    {
-        static private readonly char[] alpabet = { 'а', 'б', 'в', 'г', 'д', 'е', 'ё', 'ж', 'з', 'и', 'й', 'к', 'л', 'м', 'н', 'о', 'п', 'р', 'с', 'т', 'у', 'ф', 'х', 'ц', 'ч', 'ш', 'щ', 'ъ', 'ы', 'ь', 'э', 'ю', 'я' };
-
-        static public string Decode(string file, string key)
-        {
-            key = key.ToLower();
-            string result = "";
-            int keyword_index = 0;
-            foreach (char symbol in file)
-            {
-                if (alpabet.Contains(symbol))
-                {
-                    int p = (Array.IndexOf(alpabet, symbol) + alpabet.Length - Array.IndexOf(alpabet, key[keyword_index])) % alpabet.Length;
-                    result += alpabet[p];
-
-                    if ((keyword_index + 1) != key.Length)
-                    {
-                        keyword_index++;
-                    }
-                    else
-                    {
-                        keyword_index = 0;
-                    }
-
-                }
-                else
-                {
-                    result += symbol.ToString();
-                }
-            }
-
-            return result;
-        }
-
-        static public string Encode(string file, string key)
-        {
-
-            string result = "";
-            key = key.ToLower();
-            int keyword_index = 0;
-            foreach (char symbol in file)
-            {
-                if (alpabet.Contains(symbol))
-                {
-                    int c = (Array.IndexOf(alpabet, symbol) + Array.IndexOf(alpabet, key[keyword_index])) % alpabet.Length;
-
-                    result += alpabet[c];
-
-                    if ((keyword_index + 1) != key.Length)
-                    {
-                        keyword_index++;
-                    }
-                    else
-                    {
-                        keyword_index = 0;
-                    }
-                }
-                else
-                {
-                    result += symbol;
-
-                }
-            }
-            return result;
-        }
-    }
+    
     public class HomeController : Controller
     {
 
 
         private string path;
+        
         private readonly ILogger<HomeController> _logger;
         IWebHostEnvironment _appEnvironment;
 
@@ -94,6 +29,7 @@ namespace Lab3.Controllers
             _logger = logger;
             _appEnvironment = appEnvironment;
             path = _appEnvironment.WebRootPath + "/lib/text.docx";
+            
         }
 
 
@@ -173,6 +109,7 @@ namespace Lab3.Controllers
                 }
                 catch
                 {
+            
                     return View();
                 }
 
