@@ -19,7 +19,8 @@
     @{
         if (Model == null)
         {
-            
+            //Input form
+
             <section class="mdl-grid textArea">
                 <div class="container-fluid">
                     <div asp-validation-summary="All"></div>
@@ -52,6 +53,8 @@
     @{
         if (Model != null)
         {
+            //Result
+
             if (Model.DecryptedData != null && Model.EncryptedData != null)
             {
                 <section class="mdl-grid">

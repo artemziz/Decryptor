@@ -14,16 +14,12 @@
 </header>
 <article>
 
-
-
-
-
-
-
     @{
-        if (Model == null)
-        {
-        
+            if (Model == null)
+            {
+
+            //Input Form
+
             <section class="mdl-grid textArea">
                 <div class="container-fluid">
                     <div asp-validation-summary="All"></div>
@@ -50,12 +46,14 @@
                     </form>
                 </div>
             </section>
-        }
+            }
     }
 
     @{
         if (Model != null)
         {
+           //Result
+
             if (Model.DecryptedData != null && Model.EncryptedData != null)
             {
                 <section class="mdl-grid">

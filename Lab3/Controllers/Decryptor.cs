@@ -7,10 +7,11 @@ namespace Lab3.Controllers
 {
     public static class Decryptor
     {
-        static private readonly char[] alpabet = { 'а', 'б', 'в', 'г', 'д', 'е', 'ё', 'ж', 'з', 'и', 'й', 'к', 'л', 'м', 'н', 'о', 'п', 'р', 'с', 'т', 'у', 'ф', 'х', 'ц', 'ч', 'ш', 'щ', 'ъ', 'ы', 'ь', 'э', 'ю', 'я','0','1','2','3','4','5','6','7','8','9' };
+        static private readonly char[] alpabet = { 'а', 'б', 'в', 'г', 'д', 'е', 'ё', 'ж', 'з', 'и', 'й', 'к', 'л', 'м', 'н', 'о', 'п', 'р', 'с', 'т', 'у', 'ф', 'х', 'ц', 'ч', 'ш', 'щ', 'ъ', 'ы', 'ь', 'э', 'ю', 'я' };
 
         static public string Decode(string file, string key)
         {
+            file = file.ToLower();
             key = key.ToLower();
             string result = "";
             int keyword_index = 0;
@@ -42,7 +43,7 @@ namespace Lab3.Controllers
 
         static public string Encode(string file, string key)
         {
-
+            file = file.ToLower();
             string result = "";
             key = key.ToLower();
             int keyword_index = 0;

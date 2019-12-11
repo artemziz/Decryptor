@@ -28,41 +28,8 @@ namespace Lab3.Controllers
         {
             _logger = logger;
             _appEnvironment = appEnvironment;
-            path = _appEnvironment.WebRootPath + "/lib/text.docx";
-            
+            path = _appEnvironment.WebRootPath + "/lib/text.docx";           
         }
-
-
-
-        public void DownloadFile(CryptData cryptData)
-        {
-            using (FileStream fs = System.IO.File.Create(path))
-            {
-                cryptData.File.CopyTo(fs);
-            }
-        }
-
-        public void SaveFile(CryptData cryptData,bool answer)
-        {
-            //free license
-            ComponentInfo.SetLicense("FREE-LIMITED-KEY");
-            var doc = new DocumentModel();
-                           
-                if (answer)
-                {
-                    doc.Content.LoadText(cryptData.DecryptedData);
-                }
-                else
-                {
-                    doc.Content.LoadText(cryptData.EncryptedData);
-                }
-                
-            doc.Save(path);
-        }
-        
-
-        
-        
 
         public IActionResult Index()
         {
@@ -84,35 +51,30 @@ namespace Lab3.Controllers
                 try
                 {
                     if (cryptData.File != null)
-                    {
-                        //free license
-                        ComponentInfo.SetLicense("FREE-LIMITED-KEY");
-                        DownloadFile(cryptData);
+                    {                       
+                        FileManager.DownloadFile(cryptData,path);
 
-
-
+                        //Work with Word File
                         var document = DocumentModel.Load(path);
                         cryptData.EncryptedData = document.Content.ToString();
                         cryptData.DecryptedData = Decryptor.Decode(cryptData.EncryptedData, cryptData.Key);
-                        SaveFile(cryptData, true);
 
-
+                        //Saving result
+                        FileManager.SaveFile(cryptData,path, true);
 
                     }
                     else
                     {
+                        //Decode from Text
                         cryptData.DecryptedData = Decryptor.Decode(cryptData.EncryptedData, cryptData.Key);
-                        SaveFile(cryptData, true);
-
+                        FileManager.SaveFile(cryptData,path, true);
                     }
                     return View(cryptData);
                 }
                 catch
-                {
-            
+                {          
                     return View();
                 }
-
                                     
             }
             else
@@ -134,37 +96,35 @@ namespace Lab3.Controllers
         {
             if (ModelState.IsValid)
             {
-                
-                if (cryptData.File != null)
-                {
-                    try
+                try 
+                { 
+                    if (cryptData.File != null)
                     {
-                        //free license
-                        ComponentInfo.SetLicense("FREE-LIMITED-KEY");
-                        DownloadFile(cryptData);
+                                         
+                            FileManager.DownloadFile(cryptData,path);
 
-                        // Load Word document from file's path.
-                        var document = DocumentModel.Load(path);
-                        cryptData.DecryptedData = document.Content.ToString();
+                            //Work with Word File
 
-                        System.IO.File.Delete(path);
-                        cryptData.EncryptedData = Decryptor.Encode(cryptData.DecryptedData, cryptData.Key);
-                        SaveFile(cryptData, false);
-                    }
-                    catch
-                    {
-                        return View();
-                    }
+                            var document = DocumentModel.Load(path);
+                            cryptData.DecryptedData = document.Content.ToString();                           
+                            cryptData.EncryptedData = Decryptor.Encode(cryptData.DecryptedData, cryptData.Key);
+                            //Saving result
+                            FileManager.SaveFile(cryptData,path, false);                   
                     
+                    }
+                    else
+                    {
+                        //Decode from Text
+                        cryptData.EncryptedData = Decryptor.Encode(cryptData.DecryptedData, cryptData.Key);
+                        FileManager.SaveFile(cryptData, path, false);
 
+                    }
+                    return View(cryptData);
                 }
-                else
+                catch
                 {
-                    cryptData.EncryptedData = Decryptor.Encode(cryptData.DecryptedData, cryptData.Key);
-                    SaveFile(cryptData, false);
-
+                    return View();
                 }
-                return View(cryptData);
             }
             else
             {
@@ -179,10 +139,6 @@ namespace Lab3.Controllers
             return PhysicalFile(path, "text/plain", "Result.docx");
         }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
+       
     }
 }
